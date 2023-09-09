@@ -72,6 +72,7 @@ export const checkSlice = createSlice({
     },
     clearData: (state, action) => {
       state.inputId = initialState.inputId;
+      state.inputItem = {};
       state.itemsList = initialState.itemsList;
       state.recItem = initialState.recItem;
     },
