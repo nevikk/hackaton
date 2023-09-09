@@ -37,7 +37,7 @@ export const checkSlice = createSlice({
       if (itemIndex !== -1) {
         state.itemsList[itemIndex].quantity += 1;
       } else {
-        state.itemsList.push({...inputItem, quantity: 1, id: itemId, price: 1000});
+        state.itemsList.push({...inputItem, quantity: 1, id: itemId});
       }
 
       state.inputId = '';
