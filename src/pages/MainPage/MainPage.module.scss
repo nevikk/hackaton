@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  padding-top: 50vh;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.btns {
+  display: flex;
+  column-gap: 64px;
+}
+
+.link {
+  color: inherit;
+}
