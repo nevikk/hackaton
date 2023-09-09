@@ -1,5 +1,4 @@
 import { createSlice} from "@reduxjs/toolkit";
-import { items } from "../../../tools/data";
 
 const initialState = {
   inputId: '',
@@ -26,7 +25,7 @@ export const checkSlice = createSlice({
       } = action;
       state.inputId = inputId;
       // console.log('items', items);
-      state.inputItem = items[inputId] ? {id: inputId, title: items[inputId]} : {};
+      state.inputItem = state.items[inputId] ? {id: inputId, title: state.items[inputId]} : {};
     },
     addItemToList: (state, action) => {
       const { 
