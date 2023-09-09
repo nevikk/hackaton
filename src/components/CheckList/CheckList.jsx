@@ -35,21 +35,21 @@ const CheckList = () => {
       </div>
       {list.map((item) => (
         <div
-          key={item.id}
+          key={item.item_id}
           className={cls.item}
         >
-          <div>{item.id}</div>
+          <div>{item.item_id}</div>
           <div>{item.name}</div>
           <div>{item.price} руб.</div>
           <div className={cls.btns}>
             <Button
               className={cls.btn}
-              onClick={() => {decreaseQuantityHandler(item.id)}}
+              onClick={() => {decreaseQuantityHandler(item.item_id)}}
             >-</Button>
             <div>{item.quantity}</div>
             <Button
               className={cls.btn}
-              onClick={() => {increaseQuantityHandler(item.id)}}
+              onClick={() => {increaseQuantityHandler(item.item_id)}}
             >+</Button>
           </div>
         </div>
