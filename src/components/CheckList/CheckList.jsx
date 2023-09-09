@@ -19,7 +19,7 @@ const CheckList = () => {
   }
 
   useEffect(() => {
-    dispatch()
+    // dispatch()
   }, [list])
 
   return (
