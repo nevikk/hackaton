@@ -56,8 +56,8 @@ const MainPage = () => {
         body: file
       });
       const data = await response.json();
-      console.log('data type', typeof data);
-      console.log('data array check', Array.isArray(data));
+      // console.log('data type', typeof data);
+      // console.log('data array check', Array.isArray(data));
       if (data.length > 0) {
         setChecks(data);
       }
@@ -70,7 +70,7 @@ const MainPage = () => {
     }
   }
 
-  console.log('checks', Array.isArray(checks));
+  // console.log('checks', Array.isArray(checks));
 
   return (
     <div className={cls.wrapper}>
@@ -78,7 +78,7 @@ const MainPage = () => {
         <div className={cls.btns}>
           <div>
             <FileInput
-              title={'Загрузить датасет'}
+              title={'Обучить модель'}
               accept={'.tsv'}
               name={'dataset'}
               changeHandler={changeDatasetHandler}
@@ -94,7 +94,7 @@ const MainPage = () => {
           </div>
           <div>
             <FileInput
-              title={'Загрузить чеки'}
+              title={'Обработать чеки'}
               accept={'.tsv'}
               name={'checks'}
               changeHandler={checksChangeHandler}
