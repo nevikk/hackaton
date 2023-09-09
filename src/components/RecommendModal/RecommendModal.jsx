@@ -14,12 +14,13 @@ const RecommendModal = (props) => {
     onClose
   } = props;
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
+        dispatch(CheckActions.clearData());
         onClose();
-        navigate('/');
       }, 2000)
     }
   }, [isOpen])
