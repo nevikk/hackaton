@@ -56,6 +56,8 @@ const MainPage = () => {
         body: file
       });
       const data = await response.json();
+      console.log('data type', typeof data);
+      console.log('data array check', Array.isArray(data));
       if (data.length > 0) {
         setChecks(data);
       }
