@@ -17,13 +17,18 @@ const MainPage = () => {
       const files = new FormData();
       files.append('dataset', event.target.files[0]);
       // console.log(event.target.files[0]);
-      const url = `/train_model`;
+      const url = `http://127.0.0.1:5000/train_model`;
       const response = await fetch(url, {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",
+        mode: 'cors',
+        //headers: {
+        //  "Accept": "application/json"
+        //},
         body: files
       });
+      console.log(await response.json())
     } catch (e) {
       console.log(e);
     } finally {
