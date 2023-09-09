@@ -24,7 +24,7 @@ export const checkSlice = createSlice({
       } = action;
       state.inputId = inputId;
       // console.log('items', items);
-      state.inputItem = state.items[inputId] ? {item_id: inputId, ...state.items[inputId]} : {};
+      state.inputItem = state.items[inputId] ? {item_id: parseInt(inputId), ...state.items[inputId]} : {};
     },
     addItemToList: (state, action) => {
       const { 
@@ -32,25 +32,25 @@ export const checkSlice = createSlice({
         inputItem
       } = action.payload;
 
-      const itemIndex = state.itemsList.findIndex((item => item.item_id === itemId));
+      const itemIndex = state.itemsList.findIndex((item => item.item_id === parseInt(itemId)));
 
       if (itemIndex !== -1) {
         state.itemsList[itemIndex].quantity += 1;
       } else {
-        state.itemsList.push({...inputItem, quantity: 1, item_id: itemId});
+        state.itemsList.push({...inputItem, quantity: 1, item_id: parseInt(itemId)});
       }
 
       state.inputId = '';
       state.inputItem = {};
     },
     increaseQuantity: (state, action) => {
-      const itemId = action.payload;
+      const itemId = parseInt(action.payload);
       const itemIndex = state.itemsList.findIndex((item => item.item_id === itemId));
 
       state.itemsList[itemIndex].quantity += 1;
     },
     decreaseQuantity: (state, action) => {
-      const itemId = action.payload;
+      const itemId = parseInt(action.payload);
       const itemIndex = state.itemsList.findIndex((item => item.item_id === itemId));
 
       if (state.itemsList[itemIndex].quantity - 1 > 0) {
@@ -60,7 +60,7 @@ export const checkSlice = createSlice({
       }
     },
     addRecommendToList: (state, action) => {
-      const recItemId = state.recItem.id;
+      const recItemId = parseInt(state.recItem.id);
 
       const itemIndex = state.itemsList.findIndex((item => item.item_id === recItemId));
 
