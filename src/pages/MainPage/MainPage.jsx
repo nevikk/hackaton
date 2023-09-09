@@ -7,11 +7,13 @@ import FileInput from '../../components/FileInput/FileInput';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
+import { classNames } from '../../helpers/ClassNames/classNames';
 
 const MainPage = () => {
   const [clickable, setClickable] = useState(true);
   const [isLoadingDataset, setIsLoadingDataset] = useState(false);
   const [isLoadingChecks, setIsLoadingChecks] = useState(false);
+  const [checks, setChecks] = useState([]);
   const dispatch = useDispatch();
 
   const changeDatasetHandler = async (event) => {
@@ -54,6 +56,9 @@ const MainPage = () => {
         body: file
       });
       const data = await response.json();
+      if (data.length > 0) {
+        setChecks(data);
+      }
       console.log(data);
     } catch (e) {
       console.log(e);
@@ -94,6 +99,24 @@ const MainPage = () => {
             {isLoadingChecks ? <Loader></Loader> : null}
           </div>
         </div>
+        {
+          checks.length > 0 ?
+            <div className={cls.checks}>
+              <div className={cls.check}>
+                <div className={cls.title}>{'receipt_id'}</div>
+                <div className={cls.title}>{'item_id'}</div>
+              </div>
+              <div className={cls.checkList}>
+                {checks.map(check => 
+                  (<div className={cls.check}>
+                    <div className={cls.receipt}>{check.receipt_id}</div>
+                    <div>{check.item_id}</div>
+                  </div>)
+                )}
+              </div>
+            </div>
+          : null
+        }
       </div>
     </div>
   )
