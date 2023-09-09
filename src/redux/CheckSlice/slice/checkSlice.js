@@ -1,14 +1,13 @@
 import { createSlice} from "@reduxjs/toolkit";
+import { getRecommend } from "../asyncThunks/getRecommend";
 
 const initialState = {
   inputId: '',
   items: {},
   itemsList: [],
-  recItem: {
-    item_id: 200003,
-    name: 'Товар 3',
-    price: 10
-  }
+  recLoading: false,
+  recError: '',
+  recItem: {}
 }
 
 export const checkSlice = createSlice({
@@ -74,8 +73,36 @@ export const checkSlice = createSlice({
     clearData: (state, action) => {
       state.inputId = initialState.inputId;
       state.itemsList = initialState.itemsList;
+    },
+    setRecommend: (state, action) => {
+      const recId = action.payload;
+
+      if (state.items[recId]) {
+        state.recItem = {
+          item_id: parseInt(recId),
+          name: state.items[recId].name,
+          price: state.items[recId].price
+        };
+      } else {
+        state.recItem = {};
+      }
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getRecommend.pending, (state) => {
+        state.recLoading = true;
+        state.recError = '';
+      })
+      .addCase(getRecommend.fulfilled, (state) => {
+        state.recLoading = false;
+        state.recError = '';
+      })
+      .addCase(getRecommend.rejected, (state) => {
+        state.recLoading = false;
+        state.recError = 'Рекомендованный товар не найден';
+      })
+  }
 })
 
 export const { actions: CheckActions } = checkSlice;

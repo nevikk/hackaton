@@ -40,7 +40,7 @@ const CheckList = () => {
         >
           <div>{item.item_id}</div>
           <div>{item.name}</div>
-          <div>{item.price} руб.</div>
+          <div>{parseFloat(item.price).toFixed(2)} руб.</div>
           <div className={cls.btns}>
             <Button
               className={cls.btn}

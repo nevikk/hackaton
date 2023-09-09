@@ -30,7 +30,7 @@ const CheckHeader = () => {
       {
         inputItem?.name ?
           <div className={cls.item}>
-           {inputItem.name} {inputItem.price}.руб
+           {inputItem.name} {parseFloat(inputItem.price).toFixed(2)}.руб
           </div>
         : <div></div>
       }

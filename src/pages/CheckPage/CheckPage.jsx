@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button';
 import RecommendModal from '../../components/RecommendModal/RecommendModal';
 import { Link } from 'react-router-dom';
 import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
+import RecItem from '../../components/RecItem/RecItem';
 
 const CheckPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +39,7 @@ const CheckPage = () => {
         <div className={cls.container}>
           <Link to={'/'} className={cls.link}>Вернуться</Link>
           <CheckHeader />
+          <RecItem />
           <CheckList />
           <div className={cls.bottom}>
             <div>

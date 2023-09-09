@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { CheckActions } from "../slice/checkSlice";
 
 export const getRecommend = createAsyncThunk(
   'check/getRecommend',
@@ -17,7 +18,7 @@ export const getRecommend = createAsyncThunk(
         body: body
       });
       const data = await response.json();
-      console.log('data', data);
+      ThunkApi.dispatch(CheckActions.setRecommend(data));
     } catch(e) {
       console.log(e);
       return ThunkApi.rejectWithValue('Произошла непредивденная ошибка')
