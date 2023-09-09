@@ -4,7 +4,7 @@ export const getRecommend = createAsyncThunk(
   'check/getRecommend',
   async(list, ThunkApi) => {
     try {
-      const url = '/predict_receipt';
+      const url = 'http://127.0.0.1:5000/predict_receipt';
       const body = JSON.stringify(list);
       const response = await fetch(url, {
         method: "POST",

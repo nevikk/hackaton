@@ -20,7 +20,9 @@ const CheckList = () => {
   }
 
   useEffect(() => {
-    dispatch(getRecommend(list));
+    if (list.length > 0) {
+      dispatch(getRecommend(list));
+    }
   }, [list])
 
   return (
