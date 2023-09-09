@@ -17,6 +17,7 @@ export const checkSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action) => {
+      console.log('items', action.payload);
       state.items = action.payload;
     },
     changeInputId: (state, action) => {
@@ -24,7 +25,7 @@ export const checkSlice = createSlice({
         payload: inputId
       } = action;
       state.inputId = inputId;
-      console.log('items', items);
+      // console.log('items', items);
       state.inputItem = items[inputId] ? {id: inputId, title: items[inputId]} : {};
     },
     addItemToList: (state, action) => {
