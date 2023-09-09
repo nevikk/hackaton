@@ -5,6 +5,7 @@ import { getCheckItemsList } from '../../redux/CheckSlice/selectors/getItemsList
 import Button from '../Button/Button';
 import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
 import { classNames } from '../../helpers/ClassNames/classNames';
+import { getRecommend } from '../../redux/CheckSlice/asyncThunks/getRecommend';
 
 const CheckList = () => {
   const list = useSelector(getCheckItemsList);
@@ -19,7 +20,7 @@ const CheckList = () => {
   }
 
   useEffect(() => {
-    // dispatch()
+    dispatch(getRecommend(list));
   }, [list])
 
   return (
