@@ -68,7 +68,7 @@ const MainPage = () => {
     }
   }
 
-  console.log('checks', checks);
+  console.log('checks', Array.isArray(checks));
 
   return (
     <div className={cls.wrapper}>
