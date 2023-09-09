@@ -33,7 +33,7 @@ const RecommendModal = (props) => {
       isOpen={isOpen}
     >
       <div className={cls.item}>
-        <div>{recItem.title}</div>
+        <div>{recItem.name}</div>
         <div>{recItem.price} руб.</div>
       </div>
       <div className={cls.total}>Итоговая сумма {total + recItem.price} руб.</div>

@@ -28,14 +28,14 @@ const CheckHeader = () => {
         value={inputId}
       />
       {
-        inputItem?.title ?
+        inputItem?.name ?
           <div className={cls.item}>
-           {inputItem.title} {inputItem.price}.руб
+           {inputItem.name} {inputItem.price}.руб
           </div>
         : <div></div>
       }
       <Button
-        disabled={inputItem?.title ? false : true}
+        disabled={inputItem?.name ? false : true}
         onClick={clickHandler}
       >
         Добавить

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getItems = createAsyncThunk(
-  'check/getItems',
-  async(_, ThunkApi) => {
+export const getRecommend = createAsyncThunk(
+  'check/getRecommend',
+  async(obj, ThunkApi) => {
     try {
       
     } catch(e) {

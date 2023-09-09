@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cls from './CheckList.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCheckItemsList } from '../../redux/CheckSlice/selectors/getItemsList/getItemsList';
@@ -18,6 +18,10 @@ const CheckList = () => {
     dispatch(CheckActions.decreaseQuantity(itemId))
   }
 
+  useEffect(() => {
+    dispatch()
+  }, [list])
+
   return (
     <div className={cls.wrapper}>
       <div className={classNames(cls.item, {}, [cls.header])}>
@@ -32,7 +36,7 @@ const CheckList = () => {
           className={cls.item}
         >
           <div>{item.id}</div>
-          <div>{item.title}</div>
+          <div>{item.name}</div>
           <div>{item.price} руб.</div>
           <div className={cls.btns}>
             <Button
