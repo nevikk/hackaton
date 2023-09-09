@@ -10,6 +10,10 @@ export const getRecommend = createAsyncThunk(
         method: "POST",
         cache: "no-cache",
         mode: 'cors',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept" : "application/json"
+        },
         body: body
       });
       const data = await response.json();
