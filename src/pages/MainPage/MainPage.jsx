@@ -10,12 +10,13 @@ import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
 
 const MainPage = () => {
   const [clickable, setClickable] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDataset, setIsLoadingDataset] = useState(false);
+  const [isLoadingChecks, setIsLoadingChecks] = useState(false);
   const dispatch = useDispatch();
 
   const changeDatasetHandler = async (event) => {
     setClickable(false);
-    setIsLoading(true);
+    setIsLoadingDataset(true);
     try {
       const files = new FormData();
       files.append('dataset', event.target.files[0]);
@@ -34,7 +35,31 @@ const MainPage = () => {
       console.log(e);
     } finally {
       setClickable(true);
-      setIsLoading(false); 
+      setIsLoadingDataset(false); 
+    }
+  }
+
+  const checksChangeHandler = async (event) => {
+    setClickable(false);
+    setIsLoadingChecks(true);
+    try {
+      const file = new FormData();
+      file.append(`dataset`, event.target.files[0]);
+      const url = `http://127.0.0.1:5000/get_test_predictions`;
+      const response = await fetch(url, {
+        method: "POST",
+        cache: "no-cache",
+        credentials: "same-origin",
+        mode: 'cors',
+        body: file
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setClickable(true);
+      setIsLoadingChecks(false);
     }
   }
 
@@ -50,16 +75,23 @@ const MainPage = () => {
               changeHandler={changeDatasetHandler}
               disabled={!clickable}
             />
-            {isLoading ? <Loader></Loader> : null}
+            {isLoadingDataset ? <Loader></Loader> : null}
           </div>
           {/* <Button disabled={true}>Датасет</Button> */}
           <div>
             <Link to={'/check'} className={cls.link}>
-              <Button>Тест</Button>
+              <Button disabled={!clickable}>Тест</Button>
             </Link>
           </div>
           <div>
-            <Button disabled={true}>Загрузить чеки</Button>
+            <FileInput
+              title={'Загрузить чеки'}
+              accept={'.tsv'}
+              name={'checks'}
+              changeHandler={checksChangeHandler}
+              disabled={!clickable}
+            />
+            {isLoadingChecks ? <Loader></Loader> : null}
           </div>
         </div>
       </div>
