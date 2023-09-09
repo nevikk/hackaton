@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import FileInput from '../../components/FileInput/FileInput';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
 
 const MainPage = () => {
   const [clickable, setClickable] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const changeDatasetHandler = async (event) => {
     setClickable(false);
@@ -16,19 +19,17 @@ const MainPage = () => {
     try {
       const files = new FormData();
       files.append('dataset', event.target.files[0]);
-      // console.log(event.target.files[0]);
       const url = `http://127.0.0.1:5000/train_model`;
       const response = await fetch(url, {
         method: "POST",
         cache: "no-cache",
         credentials: "same-origin",
         mode: 'cors',
-        //headers: {
-        //  "Accept": "application/json"
-        //},
         body: files
       });
-      console.log(await response.json())
+      const data = await response.json();
+      console.log('data', data);
+      dispatch(CheckActions.setData(data));
     } catch (e) {
       console.log(e);
     } finally {

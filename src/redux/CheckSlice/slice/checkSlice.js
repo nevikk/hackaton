@@ -3,7 +3,7 @@ import { items } from "../../../tools/data";
 
 const initialState = {
   inputId: '',
-  items: items,
+  items: {},
   itemsList: [],
   recItem: {
     id: 200003,
@@ -16,12 +16,16 @@ export const checkSlice = createSlice({
   name: 'check',
   initialState,
   reducers: {
+    setData: (state, action) => {
+      state.items = action.payload;
+    },
     changeInputId: (state, action) => {
       const {
         payload: inputId
       } = action;
       state.inputId = inputId;
-      state.inputItem = items[inputId] ? items[inputId] : {};
+      console.log('items', items);
+      state.inputItem = items[inputId] ? {id: inputId, title: items[inputId]} : {};
     },
     addItemToList: (state, action) => {
       const { 
@@ -34,7 +38,7 @@ export const checkSlice = createSlice({
       if (itemIndex !== -1) {
         state.itemsList[itemIndex].quantity += 1;
       } else {
-        state.itemsList.push({...inputItem, quantity: 1, id: itemId});
+        state.itemsList.push({...inputItem, quantity: 1, id: itemId, price: 1000});
       }
 
       state.inputId = '';

@@ -9,7 +9,7 @@ import { classNames } from '../../helpers/ClassNames/classNames';
 const CheckList = () => {
   const list = useSelector(getCheckItemsList);
   const dispatch = useDispatch();
-
+  console.log('list', list);
   const increaseQuantityHandler = (itemId) => {
     dispatch(CheckActions.increaseQuantity(itemId))
   }
