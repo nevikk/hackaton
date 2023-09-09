@@ -28,7 +28,7 @@ const MainPage = () => {
         body: files
       });
       const data = await response.json();
-      console.log('data', data);
+      // console.log('data', data);
       dispatch(CheckActions.setData(data));
     } catch (e) {
       console.log(e);
