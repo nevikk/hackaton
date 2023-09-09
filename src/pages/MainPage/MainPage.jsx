@@ -59,7 +59,7 @@ const MainPage = () => {
       if (data.length > 0) {
         setChecks(data);
       }
-      console.log(data);
+      // console.log(data);
     } catch (e) {
       console.log(e);
     } finally {
@@ -67,6 +67,8 @@ const MainPage = () => {
       setIsLoadingChecks(false);
     }
   }
+
+  console.log('checks', checks);
 
   return (
     <div className={cls.wrapper}>
@@ -107,8 +109,8 @@ const MainPage = () => {
                 <div className={cls.title}>{'item_id'}</div>
               </div>
               <div className={cls.checkList}>
-                {checks.map(check => 
-                  (<div className={cls.check}>
+                {checks?.map((check, index) => 
+                  (<div key={index} className={cls.check}>
                     <div className={cls.receipt}>{check.receipt_id}</div>
                     <div>{check.item_id}</div>
                   </div>)
