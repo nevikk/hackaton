@@ -7,7 +7,7 @@ export const getRecommend = createAsyncThunk(
       const url = '/predict_receipt';
       const body = JSON.stringify(list);
       const response = await fetch(url, {
-        method: "GET",
+        method: "POST",
         cache: "no-cache",
         mode: 'cors',
         body: body
