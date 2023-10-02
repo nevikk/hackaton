@@ -1,5 +1,6 @@
 import { createSlice} from "@reduxjs/toolkit";
 import { getRecommend } from "../asyncThunks/getRecommend";
+import { getItems } from "../asyncThunks/getItems";
 
 const initialState = {
   inputId: '',
@@ -7,7 +8,8 @@ const initialState = {
   itemsList: [],
   recLoading: false,
   recError: '',
-  recItem: {}
+  recItem: {},
+  isLoading: false
 }
 
 export const checkSlice = createSlice({
@@ -103,6 +105,19 @@ export const checkSlice = createSlice({
       .addCase(getRecommend.rejected, (state) => {
         state.recLoading = false;
         state.recError = 'Рекомендованный товар не найден';
+      })
+      .addCase(getItems.pending, (state) => {
+        state.isLoading = true;
+        state.recError = '';
+      })
+      .addCase(getItems.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.recError = '';
+        state.items = action.payload;
+      })
+      .addCase(getItems.rejected, (state) => {
+        state.isLoading = false;
+        state.recError = 'Произошла ошибка при загрузке списка товаров';
       })
   }
 })

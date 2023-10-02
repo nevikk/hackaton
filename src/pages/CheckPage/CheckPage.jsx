@@ -2,17 +2,29 @@ import React, { useEffect, useMemo, useState } from 'react';
 import cls from './CheckPage.module.scss';
 import CheckHeader from '../../components/CheckHeader/CheckHeader';
 import CheckList from '../../components/CheckList/CheckList';
+import Loader from '../../components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCheckItemsList } from '../../redux/CheckSlice/selectors/getItemsList/getItemsList';
+import { getCheckDataItems } from '../../redux/CheckSlice/selectors/getDataItems/getDataItems';
 import Button from '../../components/Button/Button';
 import RecommendModal from '../../components/RecommendModal/RecommendModal';
 import { Link } from 'react-router-dom';
 import { CheckActions } from '../../redux/CheckSlice/slice/checkSlice';
 import RecItem from '../../components/RecItem/RecItem';
+import { getItems } from '../../redux/CheckSlice/asyncThunks/getItems';
+
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
+}
 
 const CheckPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const itemsList = useSelector(getCheckItemsList);
+  const dataItems = useSelector(getCheckDataItems);
+  const isLoading = useSelector(state => state.check.isLoading || false)
   const dispatch = useDispatch();
 
   const total = useMemo(
@@ -20,6 +32,14 @@ const CheckPage = () => {
       return currentTotal + item.price * item.quantity
     }, 0),
   [itemsList])
+
+  useEffect(() => {
+    dispatch(CheckActions.clearData());
+    console.log('dataItems', dataItems);
+    if (isEmpty(dataItems)) {
+      dispatch(getItems())
+    }
+  }, [])
 
   const openHandler = () => {
     setIsOpen(true);
@@ -29,9 +49,15 @@ const CheckPage = () => {
     setIsOpen(false);
   }
 
-  useEffect(() => {
-    dispatch(CheckActions.clearData());
-  }, [])
+  console.log('isLoading', isLoading);
+
+  if (isLoading) {
+    return (
+      <div className={cls.loaderWrapper}>
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <>
