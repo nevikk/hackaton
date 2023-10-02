@@ -35,9 +35,12 @@ const CheckPage = () => {
 
   useEffect(() => {
     dispatch(CheckActions.clearData());
-    console.log('dataItems', dataItems);
     if (isEmpty(dataItems)) {
       dispatch(getItems())
+    }
+
+    return () => {
+      dispatch(CheckActions.clearData());
     }
   }, [])
 

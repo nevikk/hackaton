@@ -73,10 +73,10 @@ export const checkSlice = createSlice({
 
     },
     clearData: (state, action) => {
-      state.inputId = initialState.inputId;
+      state.inputId = '';
       state.inputItem = {};
-      state.itemsList = initialState.itemsList;
-      state.recItem = initialState.recItem;
+      state.itemsList = {};
+      state.recItem = {};
     },
     setRecommend: (state, action) => {
       const recId = action.payload;
