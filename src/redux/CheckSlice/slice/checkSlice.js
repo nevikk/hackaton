@@ -75,7 +75,7 @@ export const checkSlice = createSlice({
     clearData: (state, action) => {
       state.inputId = '';
       state.inputItem = {};
-      state.itemsList = {};
+      state.itemsList = [];
       state.recItem = {};
     },
     setRecommend: (state, action) => {
