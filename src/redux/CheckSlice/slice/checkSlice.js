@@ -111,9 +111,9 @@ export const checkSlice = createSlice({
         state.recError = '';
       })
       .addCase(getItems.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.isLoading = false;
         state.recError = '';
-        state.items = action.payload;
       })
       .addCase(getItems.rejected, (state) => {
         state.isLoading = false;

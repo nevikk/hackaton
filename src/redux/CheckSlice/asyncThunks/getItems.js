@@ -3,10 +3,9 @@ import { CheckActions } from "../slice/checkSlice";
 
 export const getItems = createAsyncThunk(
   'check/getItems',
-  async(list, ThunkApi) => {
+  async(_, ThunkApi) => {
     try {
       const url = 'http://127.0.0.1:5000/item_hmap';
-      const body = JSON.stringify(list);
       const response = await fetch(url, {
         method: "GET",
         cache: "no-cache",
@@ -14,8 +13,7 @@ export const getItems = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
           "Accept" : "application/json"
-        },
-        body: body
+        }
       });
       const data = await response.json();
       return data;
