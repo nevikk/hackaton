@@ -8,7 +8,7 @@ export const getItems = createAsyncThunk(
       const url = 'http://127.0.0.1:5000/item_hmap';
       const body = JSON.stringify(list);
       const response = await fetch(url, {
-        method: "POST",
+        method: "GET",
         cache: "no-cache",
         mode: 'cors',
         headers: {
